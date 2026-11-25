@@ -70,6 +70,12 @@
    npm start
    ```
 
+5. **Run with Docker Compose** *(persistent `./data` volume)*:
+   ```bash
+   docker compose up -d --build
+   ```
+   TeleVault will be available at `http://localhost:3000` with SQLite and mirrored media stored in `./data`.
+
 ## Security Notes
 
 - Telegram Bot tokens are stored strictly on the server (via `process.env.TELEGRAM_BOT_TOKEN` or server memory) and are never returned unmasked to the browser.

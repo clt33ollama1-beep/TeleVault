@@ -54,8 +54,31 @@ TeleVault runs as a single Node.js + Express process (`server.ts`) serving both 
   ```
   Verify the service is responding on port `3000`:
   ```bash
-  curl -sf http://localhost:3000/api/chats
+  curl -sf http://localhost:3000/api/health
   ```
+
+### 2.4 Running with Docker & Docker Compose
+TeleVault includes a multi-stage `Dockerfile` (with `sqlite3` CLI preinstalled for hot backups) and `docker-compose.yml` mounting `./data:/app/data`.
+
+1. **Build and start the container**:
+   ```bash
+   docker compose up -d --build
+   ```
+2. **Pass a Bot Token via `.env` (optional)**:
+   ```bash
+   TELEGRAM_BOT_TOKEN=123456789:AAH... docker compose up -d
+   ```
+3. **Check container health and logs**:
+   ```bash
+   docker compose ps
+   docker compose logs -f televault
+   ```
+4. **Run SQLite hot backups inside the running container**:
+   ```bash
+   mkdir -p backups/$(date +%F)
+   docker exec televault sqlite3 /app/data/mirror.db ".backup '/app/data/mirror_backup.db'"
+   mv data/mirror_backup.db backups/$(date +%F)/mirror.db
+   ```
 
 ---
 

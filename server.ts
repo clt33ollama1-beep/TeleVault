@@ -3,7 +3,6 @@ import express from 'express';
 import fs from 'fs';
 import http from 'http';
 import path from 'path';
-import { createServer as createViteServer } from 'vite';
 import {
   addSyncLog,
   deleteChatAndMedia,
@@ -37,6 +36,11 @@ async function startServer() {
 
   const app = express();
   app.use(express.json({ limit: '50mb' }));
+
+  // Lightweight healthcheck endpoint for Docker & container orchestrators
+  app.get('/api/health', (_req, res) => {
+    res.json({ ok: true, service: 'televault' });
+  });
 
   // List all mirrored chats & channels
   app.get('/api/chats', (_req, res) => {
@@ -318,6 +322,7 @@ async function startServer() {
       res.sendFile(path.join(distDir, 'index.html'));
     });
   } else {
+    const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: {
         middlewareMode: true,
