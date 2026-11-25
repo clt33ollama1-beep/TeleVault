@@ -6,7 +6,7 @@ This manual provides step-by-step instructions for deploying, operating, mirrori
 
 ## 1. System Architecture & Data Layout
 
-TeleVault runs as a single Node.js + Express process (`server.ts`) serving both the REST API (`/api/*`) and the React frontend on port `3000`.
+TeleVault runs as a single Node.js + Express process (`server.ts`) serving both the REST API (`/api/*`) and the React frontend on port `3080` in Docker/production (or `3000` in development unless `PORT` is set).
 
 | Path | Purpose |
 | :--- | :--- |
@@ -52,9 +52,9 @@ TeleVault runs as a single Node.js + Express process (`server.ts`) serving both 
   npm run build
   NODE_ENV=production npm start
   ```
-  Verify the service is responding on port `3000`:
+  Verify the service is responding on port `3080`:
   ```bash
-  curl -sf http://localhost:3000/api/health
+  curl -sf http://localhost:3080/api/health
   ```
 
 ### 2.4 Running with Docker & Docker Compose

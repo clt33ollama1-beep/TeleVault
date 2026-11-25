@@ -61,20 +61,21 @@
    ```bash
    npm run dev
    ```
-   The server starts on `http://localhost:3000`.
+   The dev server starts on `http://localhost:3000` (or set `PORT=3080`).
 
 4. **Typecheck & production build**:
    ```bash
    npm run lint
    npm run build
-   npm start
+   NODE_ENV=production npm start
    ```
+   Production mode listens on `http://localhost:3080`.
 
 5. **Run with Docker Compose** *(persistent `./data` volume)*:
    ```bash
    docker compose up -d --build
    ```
-   TeleVault will be available at `http://localhost:3000` with SQLite and mirrored media stored in `./data`.
+   TeleVault will be available at `http://localhost:3080` with SQLite and mirrored media stored in `./data`.
 
 ## Security Notes
 

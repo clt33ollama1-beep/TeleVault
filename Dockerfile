@@ -19,6 +19,7 @@ FROM node:22-bookworm-slim AS runtime
 
 WORKDIR /app
 ENV NODE_ENV=production
+ENV PORT=3080
 
 # sqlite3 CLI for hot backups/maintenance & curl for container healthchecks
 RUN apt-get update && \
@@ -36,9 +37,9 @@ COPY --from=builder /app/src/types.ts ./src/types.ts
 RUN mkdir -p /app/data/media && chown -R node:node /app
 
 USER node
-EXPOSE 3000
+EXPOSE 3080
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
-  CMD curl -sf http://localhost:3000/api/health || exit 1
+  CMD curl -sf http://localhost:3080/api/health || exit 1
 
 CMD ["npm", "start"]

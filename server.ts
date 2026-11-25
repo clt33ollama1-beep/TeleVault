@@ -333,7 +333,7 @@ async function startServer() {
     app.use(vite.middlewares);
   }
 
-  const PORT = 3000;
+  const PORT = Number(process.env.PORT) || (process.env.NODE_ENV === 'production' ? 3080 : 3000);
   httpServer.listen(PORT, '0.0.0.0', () => {
     console.log(`TeleVault mirror server listening on http://localhost:${PORT}`);
   });

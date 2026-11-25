@@ -6,15 +6,16 @@ services:
     container_name: televault
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "3080:3080"
     environment:
       NODE_ENV: production
+      PORT: 3080
       # Optional: Set your Telegram Bot Token here or in a local .env file
       TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
     volumes:
       - ./data:/app/data
     healthcheck:
-      test: ["CMD", "curl", "-sf", "http://localhost:3000/api/health"]
+      test: ["CMD", "curl", "-sf", "http://localhost:3080/api/health"]
       interval: 30s
       timeout: 5s
       retries: 3
