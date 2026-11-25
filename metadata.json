@@ -1,0 +1,6 @@
+{
+  "name": "TeleVault",
+  "description": "Offline Telegram group and channel mirror system for local archiving, full-text search, and media browsing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
